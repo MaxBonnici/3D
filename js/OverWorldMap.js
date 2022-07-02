@@ -1,5 +1,6 @@
 class OverworldMap {
     constructor(config) {
+      /* Initialisation de constante (mur, image,...)*/
       this.gameObjects = config.gameObjects;
       this.walls = config.walls || {};
   
@@ -13,7 +14,7 @@ class OverworldMap {
     drawLowerImage(ctx, cameraPerson) {
       ctx.drawImage(
         this.lowerImage, 
-        utils.withGrid(10.5) - cameraPerson.x, 
+        utils.withGrid(10.5) - cameraPerson.x, //La  map doit bouger en fonction de la position du personnage
         utils.withGrid(6) - cameraPerson.y )
     }
   
@@ -21,11 +22,12 @@ class OverworldMap {
     //  ctx.drawImage(this.upperImage, 0, 0)
     //} 
 
-    isSpaceTaken(currentX,currentY, direction) {
+    isSpaceTaken(currentX,currentY, direction) { //verification de position prise
       const {x,y} = utils.nextPosition(currentX,currentY,direction);
-      return this.walls[`${x},${y}`] || false;
+      return this.walls[`${x},${y}`] || false; 
     }
 
+    /* fonction pour la récupération d'objet*/
     mountObjects() {
       Object.values(this.gameObjects).forEach(o => {
 
@@ -35,15 +37,15 @@ class OverworldMap {
       })
     }
 
-    addWall(x,y) {
+    addWall(x,y) { //rajoute mur
       this.walls[`${x},${y}`] = true;
     }
 
-    removeWall(x,y) {
+    removeWall(x,y) { //supprime mur
       delete this.walls[`${x},${y}`];
     }
 
-    moveWall(wasX, wasY, direction) {
+    moveWall(wasX, wasY, direction) { //déplacement de mur(dans le cas du héro ou d'un png qui bouge)
       this.removeWall(wasX,wasY);
       const {x,y} = utils.nextPosition(wasX,wasY,direction);
       this.addWall(x,y);

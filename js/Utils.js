@@ -1,10 +1,14 @@
 const utils = {
+    //permet d'éviter les chiffres a virgules pour la postion
     withGrid(n) {
         return n*16;
     },
+    //return les coordonnées x et y
     asGridCoord(x,y){
         return `${x*16},${y*16}`
     },
+
+    //Détecte la position que l'entitité aura lors du choix de la direction
     nextPosition(initialX, initialY, direction) {
         let x = initialX;
         let y = initialY;

@@ -10,7 +10,7 @@ class Sprite {
   
       //Shadow
       this.shadow = new Image();
-      this.useShadow = true; //config.useShadow || false
+      this.useShadow = true;
       if (this.useShadow) {
         this.shadow.src = "/Images/characters/shadow.png";
       }
@@ -29,12 +29,12 @@ class Sprite {
         "walk-up": [ [1,2], [0,2], [3,2], [0,2] ],
         "walk-left": [ [1,3], [0,3], [3,3], [0,3] ]
       }
-      this.currentAnimation = "idle-down"; //config.currentAnimation || "idle-down";
+      this.currentAnimation = "idle-down";
       this.currentAnimationFrame = 0;
 
 
 
-      this.animationFrameLimit =config.animationFrameLimit || 32;
+      this.animationFrameLimit =config.animationFrameLimit || 32;  //vitesse de mouvement
       this.animationFrameProgress = this.animationFrameLimit;
   
       //Reference the game object
@@ -46,7 +46,7 @@ get frame() {
   return this.animations[this.currentAnimation][this.currentAnimationFrame]
 }
 
-
+//changement de direction
 setAnimation(key) {
   if(this.currentAnimation !== key){
     this.currentAnimation = key;
@@ -71,16 +71,16 @@ updateAnimationProgress() {
   }
 }
 
-  
+  /* Placement du centre du jeux sur le joueur*/
     draw(ctx, cameraPerson) {
       const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x;
       const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y;
   
-      this.isShadowLoaded && ctx.drawImage(this.shadow, x, y);
+      this.isShadowLoaded && ctx.drawImage(this.shadow, x, y); //shadow toujours sous les personnages
   
       const [frameX, frameY] = this.frame;
 
-
+      //bonne proportion des images créer
       this.isLoaded && ctx.drawImage(this.image,
         frameX*32, frameY*32,
         32,32,

@@ -3,9 +3,10 @@ class Person extends GameObject {
       super(config);
       this.movingProgressRemaining = 0;
   
-      this.isPlayerControlled = config.isPlayerControlled || false;
+      this.isPlayerControlled = config.isPlayerControlled || false; 
   
       this.directionUpdate = {
+        //effet du mouvement
         "up": ["y", -1],
         "down": ["y", 1],
         "left": ["x", -1],
@@ -14,11 +15,11 @@ class Person extends GameObject {
     }
   
     update(state) {
-      if (this.movingProgressRemaining > 0) {
+      if (this.movingProgressRemaining > 0) {  //Si mouvement possible
         this.updatePosition();
       } else {
 
-        //case : we're keyboard ready and gave an arrow pressed
+        //case : mouvement autorisé et touche appuyé
         if (this.isPlayerControlled && state.arrow) {
           this.startBehavior(state, {
             type: "walk",
@@ -54,10 +55,10 @@ class Person extends GameObject {
 
     updateSprite(){
       if(this.movingProgressRemaining > 0 ){
-        this.sprite.setAnimation("walk-"+this.direction);
+        this.sprite.setAnimation("walk-"+this.direction); //Animation de marche
         return;
       }
-      this.sprite.setAnimation("idle-"+this.direction);
+      this.sprite.setAnimation("idle-"+this.direction); //Animation d'etre tourner dans un sens
     }
-  
+
   }

@@ -1,7 +1,7 @@
 class DirectionInput {
     constructor() {
-      this.heldDirections = [];
-  
+      this.heldDirections = [];  //utilisé si plusieurs touche sont utilisé en même temps
+      //Mouvement avec flèches ou ZQSD
       this.map = {
         "ArrowUp": "up",
         "KeyW": "up",
@@ -19,6 +19,7 @@ class DirectionInput {
     }
   
     init() {
+      /* MOUVEMENT AVEC TOUCHE OU ZQSD*/
       document.addEventListener("keydown", e => {
         const dir = this.map[e.code];
         if (dir && this.heldDirections.indexOf(dir) === -1) {
@@ -32,7 +33,5 @@ class DirectionInput {
           this.heldDirections.splice(index, 1);
         }
       })
-  
     }
-  
   }
