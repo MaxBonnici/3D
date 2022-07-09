@@ -56,9 +56,12 @@ class OverworldMap {
       this.addWall(x,y);
     }
   }
-  
+
+
+
   window.OverworldMaps = {
-    DemoRoom: {
+    DemoRoom: 
+    {
       lowerSrc: "/Images/maps/DemoLower.png",
       //upperSrc: "/Images/maps/DemoUpper.png",
       gameObjects: {
@@ -160,12 +163,12 @@ class OverworldMap {
         npcA: new Person({
           x: utils.withGrid(9),
           y: utils.withGrid(6),
-          src: "/Images/characters/people/npc2.png"
+          src: "/Images/characters/people/npc4.png"
         }),
         npcB: new Person({
           x: utils.withGrid(10),
           y: utils.withGrid(8),
-          src: "/Images/characters/people/npc3.png"
+          src: "/Images/characters/people/npc5.png"
         })
       }
     },
