@@ -9,6 +9,8 @@ class OverworldMap {
   
       //this.upperImage = new Image();
       //this.upperImage.src = config.upperSrc;
+
+      this.isCutscenePlaying = false; //on verra plus tard si on fera des cutscene
     }
   
     drawLowerImage(ctx, cameraPerson) {
@@ -29,11 +31,14 @@ class OverworldMap {
 
     /* fonction pour la récupération d'objet*/
     mountObjects() {
-      Object.values(this.gameObjects).forEach(o => {
+      Object.keys(this.gameObjects).forEach(key => {
+
+        let object = this.gameObjects[key];
+        object.id = key;
 
         //TODO: determine if this object should actually mount
 
-        o.mount(this);
+        object.mount(this);
       })
     }
 
@@ -62,10 +67,40 @@ class OverworldMap {
           x: utils.withGrid(5),
           y: utils.withGrid(6),
         }),
-        npc1: new Person({
+        npcA: new Person({
           x: utils.withGrid(7),
           y: utils.withGrid(9),
-          src: "/Images/characters/people/npc1.png"
+          src: "/Images/characters/people/npc1.png",
+          behaviorLoop: [
+            { type: "stand", direction: "left", time: 1200 },
+            { type: "stand", direction: "up", time: 1000 },
+            { type: "stand", direction: "right", time: 1200 },
+            { type: "stand", direction: "up", time: 700 },
+          ]
+        }),
+        npcB: new Person({
+          x: utils.withGrid(3),
+          y: utils.withGrid(7),
+          src: "/Images/characters/people/npc2.png",
+          behaviorLoop:  [
+          { type: "walk", direction: "left"},
+          { type: "stand", direction: "left", time: 200 },
+          { type: "walk", direction: "up"},
+          { type: "stand", direction: "up", time: 200 },
+          { type: "walk", direction: "right"},
+          { type: "stand", direction: "right", time: 200 },
+          { type: "walk", direction: "down"},
+          { type: "stand", direction: "down", time: 200 },
+          ]
+        }),
+        npcC: new Person({
+          x: utils.withGrid(4),
+          y: utils.withGrid(4),
+          src: "/Images/characters/people/npc3.png",
+          behaviorLoop:  [
+          { type: "stand", direction: "up", time: 10000 },
+          { type: "stand", direction: "down", time: 1000 },
+          ]
         })
       },
       walls: {
